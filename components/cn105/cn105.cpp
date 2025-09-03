@@ -1,5 +1,6 @@
 
 #include "cn105.h"
+#include <driver/gpio.h>  // Добавлено для gpio_reset_pin
 
 using namespace esphome;
 
