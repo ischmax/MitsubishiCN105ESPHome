@@ -127,7 +127,11 @@ void CN105Climate::setupUART() {
     log_info_uint32(TAG, "setupUART() with baudrate ", this->parent_->get_baud_rate());
     this->setHeatpumpConnected(false);
     this->isUARTConnected_ = false;
-
+    
+    if (this->rx_pin_ != -1) {
+        gpio_reset_pin(static_cast<gpio_num_t>(this->rx_pin_));  // Сброс RX-пина для фикса регрессии ESP-IDF 5.4.2
+    }
+    
     // just for debugging purpose, a way to use a button i, yaml to trigger a reconnect
     this->uart_setup_switch = true;
 
